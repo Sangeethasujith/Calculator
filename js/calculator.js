@@ -1,3 +1,5 @@
+"use strict";
+
 jQuery(document).ready(function() {
 
     var operand1 = null;
@@ -6,7 +8,11 @@ jQuery(document).ready(function() {
 
     var ctrls = {
         Display: "#txtDisplay",
-        PlusBtn: ".operator-plus"
+        PlusBtn: ".operator-plus",
+        MinusBtn: ".operator-minus",
+        MultiplyBtn: ".operator-mul",
+        DivideBtn: ".operator-div",
+        EqualBtn: ".equal-to"
     };
 
     $(".number-button").click(function(e) {
@@ -21,7 +27,7 @@ jQuery(document).ready(function() {
     })
 
     $(ctrls.PlusBtn).click(function(e) {
-        if (clearRequired)
+        if (clearRequired && lastOperation != null)
             return;
 
         var text = parseInt(getDisplay());
@@ -30,6 +36,60 @@ jQuery(document).ready(function() {
 
         lastOperation = '+';
         clearRequired = true;
+    })
+
+    $(ctrls.MinusBtn).click(function(e) {
+        if (clearRequired && lastOperation != null)
+            return;
+
+        var text = parseInt(getDisplay());
+        operand1 = dolastOperation(text);
+        showDisplay(operand1);
+
+        lastOperation = '-';
+        clearRequired = true;
+    })
+
+    $(ctrls.MultiplyBtn).click(function(e) {
+        if (clearRequired && lastOperation != null)
+            return;
+
+        var text = parseInt(getDisplay());
+        operand1 = dolastOperation(text);
+        showDisplay(operand1);
+
+        lastOperation = '*';
+        clearRequired = true;
+    })
+
+    $(ctrls.DivideBtn).click(function(e) {
+        if (clearRequired && lastOperation != null)
+            return;
+
+        var text = parseInt(getDisplay());
+        operand1 = dolastOperation(text);
+        showDisplay(operand1);
+
+        lastOperation = '/';
+        clearRequired = true;
+    })
+
+    $(ctrls.EqualBtn).click(function(e) {
+        if (clearRequired)
+            return;
+
+        var text = parseInt(getDisplay());
+        operand1 = dolastOperation(text);
+        showDisplay(operand1);
+
+        lastOperation = null;
+        clearRequired = true;
+
+    })
+
+    %
+    $(".clear").click(function(e) {
+        clearDisplay();
     })
 
     function dolastOperation(presentval) {
