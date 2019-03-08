@@ -12,7 +12,11 @@ jQuery(document).ready(function() {
         MinusBtn: ".operator-minus",
         MultiplyBtn: ".operator-mul",
         DivideBtn: ".operator-div",
-        EqualBtn: ".equal-to"
+        EqualBtn: ".equal-to",
+        DecimalBtn: ".decimal",
+        PlusMinus: ".plus-minus",
+        Percent: ".operator-percent",
+
     };
 
     $(".number-button").click(function(e) {
@@ -27,48 +31,29 @@ jQuery(document).ready(function() {
     })
 
     $(ctrls.PlusBtn).click(function(e) {
-        if (clearRequired && lastOperation != null)
-            return;
-
-        var text = parseInt(getDisplay());
-        operand1 = dolastOperation(text);
-        showDisplay(operand1);
+        operatorCheck();
 
         lastOperation = '+';
         clearRequired = true;
     })
 
     $(ctrls.MinusBtn).click(function(e) {
-        if (clearRequired && lastOperation != null)
-            return;
 
-        var text = parseInt(getDisplay());
-        operand1 = dolastOperation(text);
-        showDisplay(operand1);
+        operatorCheck();
 
         lastOperation = '-';
         clearRequired = true;
     })
 
     $(ctrls.MultiplyBtn).click(function(e) {
-        if (clearRequired && lastOperation != null)
-            return;
-
-        var text = parseInt(getDisplay());
-        operand1 = dolastOperation(text);
-        showDisplay(operand1);
+        operatorCheck();
 
         lastOperation = '*';
         clearRequired = true;
     })
 
     $(ctrls.DivideBtn).click(function(e) {
-        if (clearRequired && lastOperation != null)
-            return;
-
-        var text = parseInt(getDisplay());
-        operand1 = dolastOperation(text);
-        showDisplay(operand1);
+        operatorCheck();
 
         lastOperation = '/';
         clearRequired = true;
@@ -87,10 +72,29 @@ jQuery(document).ready(function() {
 
     })
 
-    %
+    $(ctrls.DecimalBtn).click(function(e) {
+        var present = getDisplay();
+        if (present.indexOf('.') == -1)
+            present += '.';
+        $(ctrls.Display).val(present);
+    })
+
+    $(ctrls.PlusMinus).click(function(e) {
+        var present = getDisplay();
+        present *= -1;
+        $(ctrls.Display).val(present);
+    })
+
+    $(ctrls.Percent).click(function(e) {
+        var present = getDisplay();
+        present = present / 100;
+        $(ctrls.Display).val(present);
+    })
+
     $(".clear").click(function(e) {
         clearDisplay();
     })
+
 
     function dolastOperation(presentval) {
         switch (lastOperation) {
@@ -105,6 +109,15 @@ jQuery(document).ready(function() {
             case null:
                 return presentval;
         }
+    }
+
+    function operatorCheck() {
+        if (clearRequired && lastOperation != null)
+            return;
+
+        var text = parseFloat(getDisplay());
+        operand1 = dolastOperation(text);
+        showDisplay(operand1);
     }
 
     function showDisplay(text) {
