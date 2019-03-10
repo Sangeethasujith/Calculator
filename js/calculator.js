@@ -8,10 +8,6 @@ jQuery(document).ready(function() {
 
     var ctrls = {
         Display: "#txtDisplay",
-        PlusBtn: ".operator-plus",
-        MinusBtn: ".operator-minus",
-        MultiplyBtn: ".operator-mul",
-        DivideBtn: ".operator-div",
         EqualBtn: ".equal-to",
         DecimalBtn: ".decimal",
         PlusMinus: ".plus-minus",
@@ -30,32 +26,15 @@ jQuery(document).ready(function() {
         $(ctrls.Display).val(presentContent + number);
     })
 
-    $(ctrls.PlusBtn).click(function(e) {
-        operatorCheck();
+    $(".operator").click(function(e) {
+        if (clearRequired && lastOperation != null)
+            return;
 
-        lastOperation = '+';
-        clearRequired = true;
-    })
+        var text = parseFloat(getDisplay());
+        operand1 = dolastOperation(text);
+        showDisplay(operand1);
 
-    $(ctrls.MinusBtn).click(function(e) {
-
-        operatorCheck();
-
-        lastOperation = '-';
-        clearRequired = true;
-    })
-
-    $(ctrls.MultiplyBtn).click(function(e) {
-        operatorCheck();
-
-        lastOperation = '*';
-        clearRequired = true;
-    })
-
-    $(ctrls.DivideBtn).click(function(e) {
-        operatorCheck();
-
-        lastOperation = '/';
+        lastOperation = $(this).data("operation");
         clearRequired = true;
     })
 
@@ -95,7 +74,6 @@ jQuery(document).ready(function() {
         clearDisplay();
     })
 
-
     function dolastOperation(presentval) {
         switch (lastOperation) {
             case '+':
@@ -109,15 +87,6 @@ jQuery(document).ready(function() {
             case null:
                 return presentval;
         }
-    }
-
-    function operatorCheck() {
-        if (clearRequired && lastOperation != null)
-            return;
-
-        var text = parseFloat(getDisplay());
-        operand1 = dolastOperation(text);
-        showDisplay(operand1);
     }
 
     function showDisplay(text) {
