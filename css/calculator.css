@@ -22,3 +22,7 @@ body {
 .equal-to {
     grid-column: 3 / span 2;
 }
+
+.highlight {
+    background-color: lightgray;
+}

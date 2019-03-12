@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
         EqualBtn: ".equal-to",
         DecimalBtn: ".decimal",
         PlusMinus: ".plus-minus",
-        Percent: ".operator-percent",
+        Percent: ".operator-percent"
 
     };
 
@@ -23,7 +23,7 @@ jQuery(document).ready(function() {
 
         var number = $(this).val();
         var presentContent = getDisplay();
-        $(ctrls.Display).val(presentContent + number);
+        showDisplay(presentContent + number);
     })
 
     $(".operator").click(function(e) {
@@ -72,6 +72,14 @@ jQuery(document).ready(function() {
 
     $(".clear").click(function(e) {
         clearDisplay();
+    })
+
+    $('input[type="button"]').mouseenter(function(e) {
+        $(this).addClass("highlight")
+    })
+
+    $('input[type="button"]').mouseleave(function(e) {
+        $(this).removeClass("highlight")
     })
 
     function dolastOperation(presentval) {
