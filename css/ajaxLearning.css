@@ -1,0 +1,11 @@
+.hide {
+    display: none;
+}
+
+.Loading {
+    background-image: url("../images/ajax-loader.gif");
+    background-repeat: no-repeat;
+    background-size: 50px 72px;
+    min-height: 100px;
+    min-width: 100px;
+}

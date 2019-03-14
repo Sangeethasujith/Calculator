@@ -19,10 +19,10 @@
             "webRoot": "${workspaceFolder}/wwwroot"
         },
         {
-            "name": "Launch index.html",
+            "name": "Launch AjaxLearning.html",
             "type": "chrome",
             "request": "launch",
-            "file": "${workspaceFolder}/calculator.html"
+            "file": "${workspaceFolder}/AjaxLearning.html"
         },
     ]
 }
