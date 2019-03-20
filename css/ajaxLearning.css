@@ -9,3 +9,7 @@
     min-height: 100px;
     min-width: 100px;
 }
+
+#spinner {
+    width: 100px;
+}

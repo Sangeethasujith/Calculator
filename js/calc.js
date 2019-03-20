@@ -29,11 +29,9 @@ jQuery(document).ready(function() {
     $(".operator").click(function(e) {
         if (clearRequired && lastOperation != null)
             return;
-
         var text = parseFloat(getDisplay());
         operand1 = dolastOperation(text);
         showDisplay(operand1);
-
         lastOperation = $(this).data("operation");
         clearRequired = true;
     })
@@ -41,14 +39,15 @@ jQuery(document).ready(function() {
     $(ctrls.EqualBtn).click(function(e) {
         if (clearRequired)
             return;
-
-        var text = parseInt(getDisplay());
+        var text = parseFloat(getDisplay());
         operand1 = dolastOperation(text);
         showDisplay(operand1);
-
-        lastOperation = null;
+        lastOperation = $(this).data("operation");
         clearRequired = true;
+    })
 
+    $(".clear").click(function(e) {
+        clearDisplay();
     })
 
     $(ctrls.DecimalBtn).click(function(e) {
@@ -60,6 +59,7 @@ jQuery(document).ready(function() {
 
     $(ctrls.PlusMinus).click(function(e) {
         var present = getDisplay();
+
         present *= -1;
         $(ctrls.Display).val(present);
     })
@@ -70,30 +70,18 @@ jQuery(document).ready(function() {
         $(ctrls.Display).val(present);
     })
 
-    $(".clear").click(function(e) {
-        clearDisplay();
-    })
-
-    $('input[type="button"]').mouseenter(function(e) {
-        $(this).addClass("highlight")
-    })
-
-    $('input[type="button"]').mouseleave(function(e) {
-        $(this).removeClass("highlight")
-    })
-
-    function dolastOperation(presentval) {
+    function dolastOperation(presentVal) {
         switch (lastOperation) {
             case '+':
-                return operand1 + presentval;
+                return operand1 + presentVal;
             case '-':
-                return operand1 - presentval;
+                return operand1 - presentVal;
             case '*':
-                return operand1 * presentval;
+                return operand1 * presentVal;
             case '/':
-                return operand1 / presentval;
+                return operand1 / presentVal;
             case null:
-                return presentval;
+                return presentVal;
         }
     }
 
